@@ -1,0 +1,29 @@
+<head>
+	<title>Lista de compra</title>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>Lista de compra</h1>
+			<form class="new-task">
+				<input type="text" name="text" placeholder="Nome" />
+				<input type="text" name="number" placeholder="Preço" />	
+				<input type="submit" value="Enviar" class="btn btn-primary btn-large" />
+			</form>
+		</header>
+		<hr>
+		<ul class="list-group">
+			<li class="list-group-item disabled">
+				<strong>Total:</strong>
+				R$ {{sum}}
+			</li>
+			{{#each list}}
+				{{> item}}
+			{{/each}}
+		</ul>
+	</div>
+</body>
+
+<template name="item">
+	<li class="list-group-item">{{text}} - R$ {{number}}</li>
+</template>
