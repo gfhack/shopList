@@ -5,7 +5,7 @@ if (Meteor.isClient) {
    Template.body.helpers({
       list: function () {
          // Show newest tasks first
-         return List.find({}, {sort: {createdAt: -1}});
+         return List.find({}, {sort: {createdAt: -1}, limit: 10});
       },
       sum: function () {
          list = List.find({}, {sort: {createdAt: -1}});
@@ -28,13 +28,15 @@ if (Meteor.isClient) {
          var text = event.target.text.value;
          var number = event.target.number.value;
 
-         number = number.replace(".", ",");
+         number = number.replace(",", ".");
 
-         List.insert({
-            text: text,
-            number: number,
-            createdAt: new Date() // current time
-         });
+         if (text != "" || number != "") {
+            List.insert({
+               text: text,
+               number: number,
+               createdAt: new Date() // current time
+            });
+         }
 
          // Clear form
          event.target.text.value = "";
